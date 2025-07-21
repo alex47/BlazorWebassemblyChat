@@ -29,7 +29,7 @@ public class SpacetimeDbService
             .WithUri(HOST)
             .WithModuleName(DB_NAME)
             .WithToken(AuthToken.Token)
-            //.WithCompression(Compression.None)
+            //.WithCompression(Compression.None) // Might need to set this to Compression.None as Brotli may not work for Blazor WebAssembly
             .OnConnect(OnConnected)
             .OnConnectError(OnConnectError)
             .OnDisconnect(OnDisconnected)
