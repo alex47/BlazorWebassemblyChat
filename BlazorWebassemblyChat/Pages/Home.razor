@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-@inject BlazorWebassembly.Services.SpacetimeDbConnector DbConnector
+@inject BlazorWebassembly.Services.SpacetimeDbService SpacetimeDbService
 
 <PageTitle>SpacetimeDB Chat</PageTitle>
 
@@ -14,15 +14,14 @@
 <input @bind="InputText" @onkeydown="HandleKeyPress" placeholder="Type a message..." />
 <button @onclick="SendMessage">Send</button>
 
-
 @code {
     private List<string> Messages = new();
     private string InputText = "";
 
     protected override void OnInitialized()
     {
-        DbConnector.InitConnection();
-        DbConnector.OnNewMessage += HandleMessage;
+        SpacetimeDbService.InitConnection();
+        SpacetimeDbService.OnNewMessage += HandleMessage;
     }
 
     private void HandleKeyPress(KeyboardEventArgs e)
@@ -43,13 +42,13 @@
     {
         if (string.IsNullOrWhiteSpace(InputText) == false)
         {
-            DbConnector.EnqueueMessage(InputText); // You’ll add this method next
+            SpacetimeDbService.EnqueueMessage(InputText); // You’ll add this method next
             InputText = "";
         }
     }
 
     public void Dispose()
     {
-        DbConnector.OnNewMessage -= HandleMessage;
+        SpacetimeDbService.OnNewMessage -= HandleMessage;
     }
 }

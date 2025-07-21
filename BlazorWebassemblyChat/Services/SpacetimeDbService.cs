@@ -1,11 +1,10 @@
 ﻿using SpacetimeDB;
 using SpacetimeDB.Types;
-using System;
 using System.Collections.Concurrent;
 
 namespace BlazorWebassembly.Services;
 
-public class SpacetimeDbConnector
+public class SpacetimeDbService
 {
     private Identity? _Identity;
     private DbConnection? _DbConnection;
@@ -30,7 +29,7 @@ public class SpacetimeDbConnector
             .WithUri(HOST)
             .WithModuleName(DB_NAME)
             .WithToken(AuthToken.Token)
-            .WithCompression(Compression.None) // Important: Set to None for Blazor WebAssembly. The default is Brotli, which is not supported in WebAssembly.
+            //.WithCompression(Compression.None)
             .OnConnect(OnConnected)
             .OnConnectError(OnConnectError)
             .OnDisconnect(OnDisconnected)
@@ -46,7 +45,9 @@ public class SpacetimeDbConnector
         Console.WriteLine("OnConnected");
 
         _Identity = identity;
-        AuthToken.SaveToken(authToken);
+
+        // Can not save token to filesystem in webassembly
+        //AuthToken.SaveToken(authToken);
 
         conn.SubscriptionBuilder()
             .OnApplied(OnSubscriptionApplied)
@@ -181,7 +182,7 @@ public class SpacetimeDbConnector
         }
     }
 
-    private string UserNameOrIdentity(User user) => user.Name ?? user.Identity.ToString()[..8];
+    private static string UserNameOrIdentity(User user) => user.Name ?? user.Identity.ToString()[..8];
 
     private void PrintMessage(RemoteTables tables, Message message)
     {
