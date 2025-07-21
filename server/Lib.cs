@@ -25,6 +25,7 @@ public static partial class Module
         name = ValidateName(name);
 
         var user = ctx.Db.user.Identity.Find(ctx.Sender);
+
         if (user is not null)
         {
             user.Name = name;
@@ -36,7 +37,9 @@ public static partial class Module
     public static void SendMessage(ReducerContext ctx, string text)
     {
         text = ValidateMessage(text);
+
         Log.Info(text);
+
         ctx.Db.message.Insert(
             new Message
             {
@@ -45,6 +48,15 @@ public static partial class Module
                 Sent = ctx.Timestamp,
             }
         );
+    }
+
+    [Reducer]
+    public static void ClearMessages(ReducerContext ctx)
+    {
+        foreach(var message in ctx.Db.message.Iter())
+        {
+            ctx.Db.message.Delete(message);
+        }
     }
 
     [Reducer(ReducerKind.ClientConnected)]

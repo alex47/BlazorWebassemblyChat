@@ -468,6 +468,7 @@ namespace SpacetimeDB.Types
             var encodedArgs = update.ReducerCall.Args;
             return update.ReducerCall.ReducerName switch
             {
+                "ClearMessages" => BSATNHelpers.Decode<Reducer.ClearMessages>(encodedArgs),
                 "ClientConnected" => BSATNHelpers.Decode<Reducer.ClientConnected>(encodedArgs),
                 "ClientDisconnected" => BSATNHelpers.Decode<Reducer.ClientDisconnected>(encodedArgs),
                 "SendMessage" => BSATNHelpers.Decode<Reducer.SendMessage>(encodedArgs),
@@ -493,6 +494,7 @@ namespace SpacetimeDB.Types
             var eventContext = (ReducerEventContext)context;
             return reducer switch
             {
+                Reducer.ClearMessages args => Reducers.InvokeClearMessages(eventContext, args),
                 Reducer.ClientConnected args => Reducers.InvokeClientConnected(eventContext, args),
                 Reducer.ClientDisconnected args => Reducers.InvokeClientDisconnected(eventContext, args),
                 Reducer.SendMessage args => Reducers.InvokeSendMessage(eventContext, args),

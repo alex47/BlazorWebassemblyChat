@@ -1,0 +1,55 @@
+﻿@page "/"
+
+@inject BlazorWebassembly.Services.SpacetimeDbConnector DbConnector
+
+<PageTitle>SpacetimeDB Chat</PageTitle>
+
+<div>
+    @foreach (var msg in Messages)
+    {
+        <div>@msg</div>
+    }
+</div>
+
+<input @bind="InputText" @onkeydown="HandleKeyPress" placeholder="Type a message..." />
+<button @onclick="SendMessage">Send</button>
+
+
+@code {
+    private List<string> Messages = new();
+    private string InputText = "";
+
+    protected override void OnInitialized()
+    {
+        DbConnector.InitConnection();
+        DbConnector.OnNewMessage += HandleMessage;
+    }
+
+    private void HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            SendMessage();
+        }
+    }
+
+    private void HandleMessage(string msg)
+    {
+        Messages.Add(msg);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(InputText) == false)
+        {
+            DbConnector.EnqueueMessage(InputText); // You’ll add this method next
+            InputText = "";
+        }
+    }
+
+    public void Dispose()
+    {
+        DbConnector.OnNewMessage -= HandleMessage;
+    }
+}

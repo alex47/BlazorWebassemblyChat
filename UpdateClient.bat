@@ -1,0 +1,1 @@
+spacetime generate --lang csharp --out-dir .\BlazorWebassemblyChat\ModuleBindings\ --project-path server
