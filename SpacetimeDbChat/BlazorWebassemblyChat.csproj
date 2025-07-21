@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.18" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\com.clockworklabs.spacetimedbsdk\SpacetimeDB.ClientSDK.csproj" />
+  </ItemGroup>
+
 </Project>
