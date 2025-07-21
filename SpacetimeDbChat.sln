@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36301.6 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpacetimeDbChat", "SpacetimeDbChat\SpacetimeDbChat.csproj", "{A61D88DB-16CE-4D8A-9955-6F797406DB62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpacetimeDB.ClientSDK", "com.clockworklabs.spacetimedbsdk\SpacetimeDB.ClientSDK.csproj", "{33BB8856-613A-975E-42B3-68C305C6DDDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A61D88DB-16CE-4D8A-9955-6F797406DB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A61D88DB-16CE-4D8A-9955-6F797406DB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A61D88DB-16CE-4D8A-9955-6F797406DB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33BB8856-613A-975E-42B3-68C305C6DDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33BB8856-613A-975E-42B3-68C305C6DDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33BB8856-613A-975E-42B3-68C305C6DDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33BB8856-613A-975E-42B3-68C305C6DDDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
